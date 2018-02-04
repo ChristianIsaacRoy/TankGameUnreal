@@ -28,3 +28,23 @@ ATank* ATankAIController::GetPlayerTank() const
 {
 	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }
+
+void ATankAIController::Tick(float DeltaSeconds)
+{
+	auto PlayerTank = GetPlayerTank();
+
+	if (!PlayerTank)
+	{
+		return;
+	}
+
+	auto ControlledTank = GetControlledTank();
+
+	if (!ControlledTank)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("TankAIController couldn't find contolled tank."));
+		return;
+	}
+
+	ControlledTank->AimAt(PlayerTank->GetActorLocation());
+}
