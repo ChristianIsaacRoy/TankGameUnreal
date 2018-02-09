@@ -8,7 +8,7 @@
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
-	PrimaryComponentTick.bCanEverTick = false;
+	PrimaryComponentTick.bCanEverTick = true;
 }
 
 void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
