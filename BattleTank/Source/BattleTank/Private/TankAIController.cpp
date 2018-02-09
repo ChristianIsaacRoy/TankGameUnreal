@@ -4,48 +4,21 @@
 #include "BattleTank.h"
 #include "Tank.h"
 
-ATank* ATankAIController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	auto PlayerTank = GetPlayerTank();
-
-	if (!PlayerTank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("TankAIController couldn't find player tank"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("TankAIController found player tank: %s"), *(PlayerTank->GetName()));
-	}
-}
-
-ATank* ATankAIController::GetPlayerTank() const
-{
-	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }
 
 void ATankAIController::Tick(float DeltaSeconds)
 {
-	auto PlayerTank = GetPlayerTank();
+	auto ControlledTank = Cast<ATank>(GetPawn());
+	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 
-	if (!PlayerTank)
+	if (!PlayerTank || !ControlledTank)
 	{
-		return;
-	}
-
-	auto ControlledTank = GetControlledTank();
-
-	if (!ControlledTank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("TankAIController couldn't find contolled tank."));
 		return;
 	}
 
 	ControlledTank->AimAt(PlayerTank->GetActorLocation());
+	ControlledTank->Fire();
 }

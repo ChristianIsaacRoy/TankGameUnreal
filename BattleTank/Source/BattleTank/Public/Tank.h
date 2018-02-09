@@ -10,6 +10,7 @@
 class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
+class AProjectile;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -17,8 +18,6 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-	void AimAt(FVector HitLocation);
-
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelComponent(UTankBarrel* NewBarrel);
 
@@ -27,6 +26,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
+
+	void AimAt(FVector HitLocation);
 
 protected:
 	UTankAimingComponent* AimingComponent;
@@ -40,8 +41,18 @@ private:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
 	
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 4000; // TODO: Find sensible launch speed
-	
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSec = 3;
+
+	// Barrel reference for spawning projectiles
+	UTankBarrel* Barrel = nullptr;
+
+	double LastFireTime = 0;
 };
