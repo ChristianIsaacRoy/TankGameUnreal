@@ -18,6 +18,11 @@ void ATank::SetTurretComponent(UTankTurret* NewTurret)
 	AimingComponent->SetTurretReference(NewTurret);
 }
 
+void ATank::Fire()
+{
+	UE_LOG(LogTemp, Warning, TEXT("FIRE THE GUNS CAPTAIN!"));
+}
+
 // Sets default values
 ATank::ATank()
 {	

@@ -25,6 +25,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretComponent(UTankTurret* NewTurret);
 
+	UFUNCTION(BlueprintCallable)
+	void Fire();
+
 protected:
 	UTankAimingComponent* AimingComponent;
 
