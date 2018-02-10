@@ -4,6 +4,14 @@
 #include "TankBarrel.h"
 #include "Projectile.h"
 #include "TankAimingComponent.h"
+#include "TankMovementComponent.h"
+
+// Sets default values
+ATank::ATank()
+{
+	PrimaryActorTick.bCanEverTick = false;
+	AimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+}
 
 void ATank::AimAt(FVector HitLocation)
 {
@@ -37,13 +45,6 @@ void ATank::Fire()
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
 	}
-}
-
-// Sets default values
-ATank::ATank()
-{	
-	PrimaryActorTick.bCanEverTick = false;
-	AimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 }
 
 // Called when the game starts or when spawned
