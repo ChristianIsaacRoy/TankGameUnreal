@@ -18,6 +18,4 @@ class BATTLETANK_API ATankAIController : public AAIController
 
 	virtual void Tick(float DeltaSeconds) override;
 
-	// How close can the tank be in ordre to move to the player
-	float AcceptanceRadius = 3000;
 };
