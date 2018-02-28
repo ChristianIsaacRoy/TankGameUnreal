@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "TankMovementComponent.h"
 #include "TankTrack.h"
 
@@ -12,14 +10,15 @@ void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
 	if (!LeftTrack || !RightTrack) { return; }
+
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
-	// TODO: Prevent double speed due to this and the manual throttle control
 }
 
 void UTankMovementComponent::IntendMoveRight(float Throw)
 {
 	if (!LeftTrack || !RightTrack) { return; }
+
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
 }
@@ -33,7 +32,6 @@ void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, boo
 	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardDirection).Z;
 	IntendMoveForward(ForwardThrow);
 	IntendMoveRight(RightThrow);
-	//UE_LOG(LogTemp, Warning, TEXT(%s vectoring to %s), *TankName, *MoveVelocityString);
 }
 
 
