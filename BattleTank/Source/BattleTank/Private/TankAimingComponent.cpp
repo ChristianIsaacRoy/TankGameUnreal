@@ -1,5 +1,5 @@
-#include "BattleTank.h"
 #include "TankAimingComponent.h"
+#include "BattleTank.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
 #include "Kismet/GameplayStatics.h"
@@ -7,11 +7,10 @@
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
-	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
-void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector WorldSpaceAim)
 {
 	if (!ensure(Barrel)) { return; }
 

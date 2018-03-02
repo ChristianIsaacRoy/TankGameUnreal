@@ -6,7 +6,6 @@
 
 // Forward Declarations
 class UTankBarrel;
-class UTankAimingComponent;
 class AProjectile;
 
 UCLASS()
@@ -17,12 +16,6 @@ class BATTLETANK_API ATank : public APawn
 public:
 	UFUNCTION(BlueprintCallable)
 	void Fire();
-
-	void AimAt(FVector HitLocation);
-
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* AimingComponent;
 
 private:
 	// Sets default values for this pawn's properties
