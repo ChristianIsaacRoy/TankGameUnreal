@@ -2,7 +2,6 @@
 #include "TankBarrel.h"
 #include "Projectile.h"
 #include "TankAimingComponent.h"
-#include "TankMovementComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -13,18 +12,21 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
+
+	AimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 void ATank::AimAt(FVector HitLocation)
 {
-	if (!AimingComponent) { return; }
+	if (!ensure(AimingComponent)) { return; }
 
 	AimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
 {
-	if (!Barrel) { return; }
+	if (!ensure(Barrel) || !ensure(ProjectileBlueprint)) { return; }
+
 	bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSec;
 
 	if (bIsReloaded){
