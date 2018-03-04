@@ -11,7 +11,7 @@ ATankPlayerController::ATankPlayerController()
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	if (!(GetPawn())) { return; }
+	if (!(GetPawn())) { return; } // i.e. not possessing a pawn
 
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (ensure(!AimingComponent)) { return; }
@@ -27,7 +27,7 @@ void ATankPlayerController::Tick(float DeltaSeconds)
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!(GetPawn())) { return; }
+	if (!(GetPawn())) { return; } // i.e. not possessing a pawn
 
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (ensure(!AimingComponent)) { return; }
