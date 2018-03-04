@@ -52,7 +52,15 @@ private:
 	
 	double LastFireTime = 0;
 
+	FVector AimDirection = FVector::ZeroVector;
+
 	UTankAimingComponent();
 
+	virtual void BeginPlay() override;
+
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+
 	void MoveBarrelTowards(FVector AimDirection);
+
+	bool IsBarrelMoving();
 };

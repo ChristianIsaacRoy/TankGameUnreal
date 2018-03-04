@@ -2,9 +2,16 @@
 #include "TankAimingComponent.h"
 #include "BattleTank.h"
 
+ATankPlayerController::ATankPlayerController()
+{
+
+
+}
+
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+	if (!(GetPawn())) { return; }
 
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (ensure(!AimingComponent)) { return; }
@@ -15,12 +22,12 @@ void ATankPlayerController::BeginPlay()
 void ATankPlayerController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-	AimTowardsCrosshair();
+		AimTowardsCrosshair();
 }
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!GetPawn()) { return; }
+	if (!(GetPawn())) { return; }
 
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (ensure(!AimingComponent)) { return; }

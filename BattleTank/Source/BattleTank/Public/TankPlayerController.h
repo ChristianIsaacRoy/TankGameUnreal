@@ -28,6 +28,8 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000;
 
+	ATankPlayerController();
+
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaSeconds) override;
